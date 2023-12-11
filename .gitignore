@@ -33,6 +33,6 @@ build/
 .vscode/
 
 ##maven##
-mvnw
 mvnw.cmd
+mvnw
 .mvn
