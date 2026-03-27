@@ -73,34 +73,31 @@ export default function WorkCard({ card, delay }: WorkCardProps) {
                        bg-vintage-lavender-1000 bg-opacity-40 text-vintage-lavender-400 font-primary"
             >
                 <div className="flex gap-2">
-                    {/* Awards column */}
-                    <div className="flex flex-col w-full">
-                        <div className="py-3 font-bitcount text-sm">Achievements</div>
-                        {card.awards?.filter((award) =>
-                            award.companies?.includes(card.name))
-                            .map(award => (
+                    {card.awards !== undefined && (
+                        <div className="flex flex-col w-full">
+                            <div className="py-3 font-bitcount text-sm">Achievements</div>
+                            {card.awards?.map(award => (
                                 <div key={award.name + award.description} className="font-bold py-2 text-xs">
                                     {award.name}
                                     <div className="font-light">{award.description}</div>
                                 </div>
                             ))}
-                    </div>
+                        </div>
+                    )}
 
                     {/* STAR column */}
                     <div className="flex flex-col w-full">
                         <div className="py-3 font-bitcount text-sm">STAR Situations</div>
-                        {card.stars?.filter((star) =>
-                            star.companies?.includes(card.name))
-                            .map(star => (
-                                <div key={star.name} className="font-bold py-2 text-xs">
-                                        {star.name}
-                                    <div className="py-3">
-                                        <div className="font-light">{star.situation}</div>
-                                        <br/>
-                                        <div className="font-light">{star.action}</div>
-                                    </div>
+                        {card.stars?.map(star => (
+                            <div key={star.name} className="font-bold py-2 text-xs">
+                                {star.name}
+                                <div className="py-3">
+                                    <div className="font-light">{star.situation}</div>
+                                    <br/>
+                                    <div className="font-light">{star.action}</div>
                                 </div>
-                            ))}
+                            </div>
+                        ))}
                     </div>
                 </div>
             </motion.div>

@@ -125,7 +125,14 @@ export const STARS: Star[] = [
         action: 'First, trained a teammate on the manual execution process to distribute the knowledge and reduce the single point of failure. Then, once the Bulk Report feature was in place and provided the proper infrastructure foundation, I scoped out a full frontend report page during downtime and built it in a maintained branch. The new UI exposed the report configuration and submission directly to the client in a clean, self-service interface. Once approved, deployment was seamless since the work was already production-ready.',
         result: 'The quarterly report was fully handed off to the client. What previously required a developer to manually configure and execute each quarter is now self-managed by the client with little to no dev team involvement, freeing up developer and support time for higher value work.',
         companies: [COMPANY_PROPS.CIRCANA],
-    },
+    },{
+        name: 'UHC Eligibility Scraping — Legacy Codebase Ownership',
+        situation: 'Recondo maintained a large, complex legacy codebase responsible for scraping patient eligibility data from UnitedHealthcare (UHC) portals. The system was business-critical, handling a high volume of automated data extraction and was deeply intertwined with existing carrier-specific logic.',
+        task: 'Own and maintain the UHC eligibility scraping integration — resolving incoming defects, keeping the integration stable, and extending it with new features without disrupting existing functionality.',
+        action: 'Triaged and resolved client-reported tickets specific to the UHC integration by thoroughly investigating root causes, engineering targeted fixes, and validating solutions before QA handoff. Extended the integration with new features while navigating the complexity of the legacy system and UHC portal changes.',
+        result: 'Maintained stability and reliability of the UHC eligibility scraping integration while delivering new functionality and keeping defect rates low across a high-volume, business-critical workflow.',
+        companies: [COMPANY_PROPS.RECONDO],
+    }
 ]
 
 
@@ -145,6 +152,7 @@ export const WORK_CARDS: CardProps[] = [
         dates: ["Nov 2015", "July 2018"],
         description: 'I built Java-based automation bots using Selenium WebDriver to extract patient claim and authorization data from health insurance web portals, collaborated with business analysts to refine requirements, and supported reliable deployments through hands-on DevOps work.',
         skills: SKILLS.filter((skill) => skill.sectionIds.includes('work')
-        && skill.companies?.includes(COMPANY_PROPS.RECONDO)),
+                                && skill.companies?.includes(COMPANY_PROPS.RECONDO)),
+        stars: STARS.filter((star) => star.companies?.includes(COMPANY_PROPS.RECONDO)),
     }
 ]
