@@ -1,25 +1,23 @@
 import type {RightColumnProps} from "../types.ts";
-import WorkSection from "./sections/WorkSection.tsx";
 import BuilderSection from "./sections/BuilderSection.tsx";
 import BeyondDeskSection from "./sections/BeyondDeskSection.tsx";
+import WorkSection from "./sections/WorkSecton.tsx";
+import ConnectSection from "./sections/ConnectSection.tsx";
 
-function Connect() {
-    return null;
-}
 
-export default function RightColumn({ sectionRefs, onHover }: RightColumnProps) {
+export default function RightColumn({ sectionRefs }: RightColumnProps) {
     const { work, builder, personal, connect } = sectionRefs;
 
     return (
         <div className="px-8 py-10 justify-between">
-            <div ref={work} data-section="work" className="h-screen ">
+            <div ref={work} data-section="work" >
                 {/* Header */}
                 <h1 className="font-bitcount text-3xl text-vintage-lavender-300">
                     The Work
                 </h1>
                 <WorkSection/>
             </div>
-            <div ref={builder} data-section="builder" className="h-screen">
+            <div ref={builder} data-section="builder">
                 {/* Header */}
                 <h1 className="font-bitcount text-3xl text-vintage-lavender-300">
                     The Builder
@@ -38,7 +36,7 @@ export default function RightColumn({ sectionRefs, onHover }: RightColumnProps) 
                 <h1 className="font-bitcount text-3xl text-vintage-lavender-300">
                     Connect
                 </h1>
-                <Connect />
+                <ConnectSection />
             </div>
         </div>
     )

@@ -1,17 +1,17 @@
 import { useEffect, useRef, useState} from "react";
-import {type CardProps, type Section, type SectionId, SECTIONS} from "../types.ts";
 import LeftColumn from "./LeftColumn.tsx";
 import type { RefObject } from "react";
 import RightColumn from "./RightColumn.tsx";
 import WelcomeSection from "./sections/WelcomeSection.tsx";
 import {AnimatePresence, motion} from "framer-motion";
+import {SECTIONS} from "../data.ts";
+import type {Section, SectionId} from "../types.ts";
 
 
 
 export default function MainLayout() {
     const [activeSection, setActiveSection] = useState<Section | undefined>(SECTIONS[0]);
     const [hasScrolled, setHasScrolled] = useState<boolean>(false);
-    const [hoveredCard, setHoveredCard] = useState<CardProps>();
     const [leftColumnVisible, setLeftColumnVisible] = useState<boolean>(false);
 
 
@@ -125,7 +125,6 @@ export default function MainLayout() {
                         activeSection={activeSection}
                         section={sectionRefs}
                         hasScrolled={hasScrolled}
-                        hoveredCard={hoveredCard}
                         leftColumnVisible={leftColumnVisible}
                     />
                 </div>
@@ -134,7 +133,6 @@ export default function MainLayout() {
                 <div className="w-3/5 shrink-0">
                     <RightColumn
                         sectionRefs={sectionRefs}
-                        onHover={setHoveredCard}
                     />
                 </div>
             </motion.div>
