@@ -6,6 +6,8 @@ import WelcomeSection from "./sections/WelcomeSection.tsx";
 import {AnimatePresence, motion} from "framer-motion";
 import {SECTIONS} from "../data.ts";
 import type {Section, SectionId} from "../types.ts";
+import {useGithubRepos} from "../hooks/useGithubRepos.ts";
+
 
 
 
@@ -13,13 +15,13 @@ export default function MainLayout() {
     const [activeSection, setActiveSection] = useState<Section | undefined>(SECTIONS[0]);
     const [hasScrolled, setHasScrolled] = useState<boolean>(false);
     const [leftColumnVisible, setLeftColumnVisible] = useState<boolean>(false);
-
-
     const welcomeSectionRef = useRef<HTMLDivElement>(null)
     const workSectionRef = useRef<HTMLDivElement>(null);
     const builderSectionRef = useRef<HTMLDivElement>(null);
     const personalSectionRef = useRef<HTMLDivElement>(null);
     const connectSectionRef = useRef<HTMLDivElement>(null);
+
+    const githubResponse = useGithubRepos("klambo94", 5);
 
     const sectionRefs: Record<SectionId, RefObject<HTMLDivElement | null>> = {
         welcome: welcomeSectionRef,
@@ -133,6 +135,7 @@ export default function MainLayout() {
                 <div className="w-3/5 shrink-0">
                     <RightColumn
                         sectionRefs={sectionRefs}
+                        githubResponse={githubResponse}
                     />
                 </div>
             </motion.div>

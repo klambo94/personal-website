@@ -31,7 +31,7 @@ export default function WorkCard({ card, delay }: WorkCardProps) {
                 initial={{opacity: 0, y: 20}}
                 animate={visible ? {opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, ease: "easeOut", delay: delay }}
-                whileHover={{ y:-4, transition: { duration: 0.1, ease: "easeInOut" }}}
+                whileHover={{ y:-4}}
                 onClick={() => setExpanded(prev => !prev)}
                 className="flex flex-col gap-3 p-6 rounded-lg border border-vintage-lavender-600
                        hover:border-vintage-lavender-400 cursor-default transition-all
@@ -68,7 +68,7 @@ export default function WorkCard({ card, delay }: WorkCardProps) {
                 animate={expanded ? {opacity: 1, height: "auto"} : {opacity: 0, height: 0}}
                 transition={{duration: 0.4, ease: "easeInOut"}}
                 className="mt-4 w-full flex border-vintage-lavender-600 border rounded-lg p-3
-                       hover:border-vintage-lavender-400 cursor-default transition-all
+                       hover:border-vintage-lavender-400 cursor-auto transition-all
                          hover:-translate-y-2 hover:  hover:shadow-lg hover:shadow-vintage-lavender-800
                        bg-vintage-lavender-1000 bg-opacity-40 text-vintage-lavender-400 font-primary"
             >

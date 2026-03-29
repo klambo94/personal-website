@@ -20,6 +20,7 @@ export type LeftColumnProps = {
 
 export type RightColumnProps = {
     sectionRefs: Record<SectionId, RefObject<HTMLDivElement | null>>;
+    githubResponse: GithubResponse;
 }
 
 export type WorkCardProps =  {
@@ -50,7 +51,11 @@ export type CardProps = {
     dates?: string[];
     role?: string;
 }
-
+export type GithubResponse = {
+    repos: GithubRepo[],
+    loading: boolean,
+    error: string | null,
+}
 
 export type GithubRepo = {
     id: number;
@@ -76,4 +81,21 @@ export type Star = {
     action: string;
     result: string;
     companies?: string[];
+}
+
+export type FormStatus = 'idle' | 'sending' | 'success' | 'error';
+
+
+export type FormData = {
+    name: string;
+    subject: string;
+    email: string;
+    message: string;
+}
+
+export type FormErrors = {
+    name?: string;
+    subject?: string;
+    email?: string;
+    message?: string;
 }
