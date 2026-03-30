@@ -264,7 +264,7 @@ export default function LeftColumn({
                         </div>
                 )}
                 <a
-                    href="/"
+                    href="/public"
                     className="flex items-center gap-1 text-xs text-vintage-lavender-200
                hover:text-vintage-lavender-400 transition-colors"
                 >
