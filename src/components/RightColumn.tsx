@@ -5,20 +5,20 @@ import WorkSection from "./sections/WorkSecton.tsx";
 import ConnectSection from "./sections/ConnectSection.tsx";
 
 
-export default function RightColumn({ sectionRefs, githubResponse }: RightColumnProps) {
-    const { work, builder, personal, connect } = sectionRefs;
+export default function RightColumn({ githubResponse }: RightColumnProps) {
+
     return (
-        <div className="px-8 py-10 justify-between">
-            <div ref={work} data-section="work" >
+        <div className="px-8 py-25 justify-between">
+            <div  data-section="work" >
                 {/* Header */}
-                <h1 className="font-bitcount text-3xl text-vintage-lavender-300">
+                <h1 className="font-bitcount text-6xl text-vintage-lavender-300">
                     The Work
                 </h1>
                 <WorkSection/>
             </div>
-            <div ref={builder} data-section="builder" className="pt-5">
+            <div data-section="builder" className="pt-5">
                 {/* Header */}
-                <h1 className="font-bitcount text-3xl text-vintage-lavender-300">
+                <h1 className="font-bitcount text-6xl text-vintage-lavender-300">
                     The Builder
                 </h1>
 
@@ -27,7 +27,7 @@ export default function RightColumn({ sectionRefs, githubResponse }: RightColumn
                     <BuilderSection githubRepos={githubResponse.repos}/>
                 ) : (
                     <div className="flex h-screen text-vintage-lavender-300
-                     font-primary items-center justify-center text-2xl ">
+                     font-primary items-center justify-center text-8xl ">
                         <div>
                             <span>Oops... The connection to Github seems to be broken.</span>
                             <br/>
@@ -46,16 +46,16 @@ export default function RightColumn({ sectionRefs, githubResponse }: RightColumn
 
 
             </div>
-            <div ref={personal} data-section="personal" className="pt-15">
+            <div data-section="personal" id="personal" className="pt-15">
                 {/* Header */}
-                <h1 className="font-bitcount text-3xl text-vintage-lavender-300">
+                <h1 className="font-bitcount text-6xl text-vintage-lavender-300">
                     Beyond the Desk
                 </h1>
                 <BeyondDeskSection/>
             </div>
-            <div ref={connect} data-section="connect" className="pt-15">
+            <div data-section="connect" className="pt-15">
                 {/* Header */}
-                <h1 className="font-bitcount text-3xl text-vintage-lavender-300">
+                <h1 className="font-bitcount text-6xl text-vintage-lavender-300">
                     Connect
                 </h1>
                 <ConnectSection />

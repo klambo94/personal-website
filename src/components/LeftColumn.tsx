@@ -10,7 +10,6 @@ const FILTER_OPTIONS = ['All', ...Object.values(SKILL_TYPE)];
 
 export default function LeftColumn({
                                        activeSection,
-                                       hasScrolled,
                                        leftColumnVisible,
                                    }: LeftColumnProps) {
 
@@ -21,10 +20,10 @@ export default function LeftColumn({
 
     // Reset expanded when user scrolls back to top
     useEffect(() => {
-        if (!hasScrolled) {
+        if (activeSection?.getAttribute("data-section")!= "work") {
             queueMicrotask(() => setExpanded(false));
         }
-    }, [hasScrolled]);
+    });
 
     // Close dropdown when active section changes
     useEffect(() => {
@@ -49,8 +48,9 @@ export default function LeftColumn({
     // Badge highlight logic:
     // hoveredCard skills take priority over activeSection scroll position
     const isActive = (skill: Skill): boolean => {
-        if (activeSection === undefined || activeSection?.sectionId === 'connect') return false;
-        return skill.sectionIds.includes(activeSection?.sectionId);
+        const dataSectionTag= activeSection?.getAttribute("data-section");
+        if (dataSectionTag === undefined ||dataSectionTag === null|| dataSectionTag === 'connect') return false;
+        return skill.sectionIds.includes(dataSectionTag);
     }
 
     // Whether a skill matches the active filter
@@ -73,14 +73,14 @@ export default function LeftColumn({
         return { opacity: 0.15, scale: 0.9 };
     }
 
-    const isCollapsed = leftColumnVisible && hasScrolled && !expanded;
+    const isCollapsed = leftColumnVisible && activeSection?.getAttribute("data-section") != "work" && !expanded;
 
     return (
         <div className="flex flex-col h-full px-8 py-10 justify-between">
             {/*  Top section: Header + Intro + Badges  */}
             <div className="flex flex-col gap-6">
                 {/* Header */}
-                <h1 className="font-bitcount text-3xl text-vintage-lavender-300">
+                <h1 className="font-bitcount text-6xl text-vintage-lavender-300">
                     The Engineer
                 </h1>
 
@@ -90,7 +90,7 @@ export default function LeftColumn({
                         animate={{height: isCollapsed ? '4.5rem' : 'auto' }}
                         transition={{duration: 0.4, ease: 'easeInOut'}}
                         className="overflow-hidden">
-                        <p className="text-sm loading-relaxed font-primary text-vintage-lavender-300">
+                        <p className="text-3xl loading-relaxed font-primary text-vintage-lavender-300">
                             I am a Senior Software Engineer with over 11 years of experience
                             building backend systems, APIs, and full-stack products. I care
                             deeply about the craft, not just writing code that works, but
@@ -121,13 +121,13 @@ export default function LeftColumn({
 
                     {/* Read more / collapse toggle */}
                     <AnimatePresence>
-                        {hasScrolled && (
+                        {activeSection?.getAttribute("data-section") != "work" && (
                             <motion.button
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
                                 onClick={() => setExpanded(prev => !prev)}
-                                className="mt-1 text-xs text-vintage-lavender-400
+                                className="mt-1 text-xl text-vintage-lavender-400
                                            hover:text-vintage-lavender-200 transition-colors"
                             >
                                 {expanded ? 'collapse' : 'read more'}
@@ -140,8 +140,8 @@ export default function LeftColumn({
                 {/* Work + Builder badges */}
                 {/*TODO: Not all badges are showing - will need to look into that.*/}
                 {activeSection !== undefined
-                    && (activeSection?.sectionId === 'work'
-                        || activeSection?.sectionId === 'builder')
+                    && (activeSection?.getAttribute("data-section") === 'work'
+                        || activeSection?.getAttribute("data-section") === 'builder')
                     && (
                         <div className="flex flex-wrap gap-2">
                             {SKILLS.filter(skill => (
@@ -149,7 +149,7 @@ export default function LeftColumn({
                                 .map((skill) => (
                                     <motion.span
                                         key={skill.name}
-                                        className={`px-2 py-0.5 rounded-full font-primary text-[11px] border transition-colors
+                                        className={`px-2 py-0.5 rounded-full font-primary text-2xl border transition-colors
                                 ${isActive(skill)
                                             ? 'hidden'
                                             : 'border-vintage-lavender-300 text-vintage-lavender-300'
@@ -162,8 +162,8 @@ export default function LeftColumn({
                     )}
 
                 {/* Personal badges */}
-                {activeSection !== undefined &&
-                    (activeSection?.sectionId === 'personal')
+                {activeSection?.getAttribute("data-section")!== undefined &&
+                    (activeSection?.getAttribute("data-section") === 'personal')
                     && (
                         <div className="flex flex-wrap gap-2">
                             {SKILLS.filter(skill =>
@@ -173,7 +173,7 @@ export default function LeftColumn({
                                         key={skill.name}
                                         animate={getAnimationState(skill)}
                                         transition={{ duration: 0.2 }}
-                                        className="px-2 py-0.5 rounded-full font-primary text-[11px]
+                                        className="px-2 py-0.5 rounded-full font-primary text-2xl
                                                     border transition-colors
                                                     border-vintage-lavender-300
                                                     text-vintage-lavender-300"
@@ -185,8 +185,8 @@ export default function LeftColumn({
                     )}
 
                 {/* Connect section — filterable badges */}
-                {activeSection !== undefined
-                    && activeSection?.sectionId === 'connect'
+                {activeSection?.getAttribute("data-section") !== undefined
+                    && activeSection?.getAttribute("data-section") === 'connect'
                     && (
                         //  Filter based on type - independent of active section
                         <div className="flex flex-wrap gap-3">
@@ -226,7 +226,7 @@ export default function LeftColumn({
                                                         setActiveFilter(filter);
                                                         setShowFilter(false);
                                                     }}
-                                                    className={`px-3 py-1.5 text-left text-xs
+                                                    className={`px-3 py-1.5 text-left text-xl
                                                         transition-colors
                                                         hover:bg-vintage-lavender-900
                                                         ${activeFilter === filter
@@ -251,7 +251,7 @@ export default function LeftColumn({
                                         <motion.span
                                             key={skill.name}
                                             transition={{ duration: 0.2 }}
-                                            className={`px-2 py-0.5 rounded-full font-primary text-[11px] border transition-colors
+                                            className={`px-2 py-0.5 rounded-full font-primary text-2xl border transition-colors
                                 ${activeFilter === 'All' || skill.type.includes(activeFilter)
                                                 ? 'border-vintage-lavender-300 text-vintage-lavender-300'
                                                 :  'hidden'
@@ -265,7 +265,7 @@ export default function LeftColumn({
                 )}
                 <a
                     href="/public"
-                    className="flex items-center gap-1 text-xs text-vintage-lavender-200
+                    className="flex items-center gap-1 text-2xl text-vintage-lavender-200
                hover:text-vintage-lavender-400 transition-colors"
                 >
                     <MoveUp size={12} /> Back To Top

@@ -12,14 +12,14 @@ export default function BuilderSection({githubRepos}: { githubRepos: GithubRepo[
                     animate={{opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
                     whileHover={{ y:-4, transition: { duration: 0.1, ease: "easeInOut" }}}
-                    className="gap-3 p-6 rounded-lg border border-vintage-lavender-600
+                    className="gap-3 p-6 rounded-xl border-3 border-vintage-lavender-600
                        hover:border-vintage-lavender-400 cursor-default transition-all
                         hover:shadow-lg hover:shadow-vintage-lavender-800 text-vintage-lavender-200
                        bg-vintage-lavender-1000 bg-opacity-40"
                 >
                     <div className="flex flex-col">
                         <div className="flex flex-row gap-x-3">
-                            <h2 className="font-bitcount text-2xl text-vintage-lavender-300">
+                            <h2 className="font-bitcount text-4xl text-vintage-lavender-300">
                                 {repo.name}
                             </h2>
 
@@ -34,7 +34,7 @@ export default function BuilderSection({githubRepos}: { githubRepos: GithubRepo[
                                                 transition-colors"><ArrowRight /></a>
                         </div>
                         {/* Description */}
-                        <p className="text-sm font-primary text-vintage-lavender-300 leading-relaxed">
+                        <p className="text-2xl font-primary text-vintage-lavender-300 leading-relaxed">
                             {repo.description}
                         </p>
                     </div>

@@ -1,4 +1,3 @@
-import type { RefObject } from "react";
 
 
 export type Section = {
@@ -11,15 +10,12 @@ export type SectionId = 'welcome' | 'work' | 'builder' | 'personal' | 'connect';
 
 
 export type LeftColumnProps = {
-    activeSection: Section | undefined;
-    section: Record<SectionId, RefObject<HTMLDivElement | null>>;
-    hasScrolled: boolean;
+    activeSection: Element | undefined;
     leftColumnVisible: boolean;
 
 }
 
 export type RightColumnProps = {
-    sectionRefs: Record<SectionId, RefObject<HTMLDivElement | null>>;
     githubResponse: GithubResponse;
 }
 

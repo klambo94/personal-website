@@ -1,26 +1,10 @@
 import { motion } from "framer-motion";
 import type {WorkCardProps} from "../types.ts";
-import {useEffect, useRef, useState} from "react";
+import {useRef, useState} from "react";
 
 export default function WorkCard({ card, delay }: WorkCardProps) {
-    const [visible, setVisible] = useState(false);
     const [expanded, setExpanded] = useState<boolean>(false);
     const ref = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setVisible(true);
-                    observer.disconnect();
-                }
-            },
-            { threshold: 0.2 }
-        );
-
-        if (ref.current) observer.observe(ref.current);
-        return () => observer.disconnect();
-    }, []);
 
 
     return (
@@ -28,36 +12,35 @@ export default function WorkCard({ card, delay }: WorkCardProps) {
             {/*Work Section Card*/}
             <motion.div
                 ref={ref}
-                initial={{opacity: 0, y: 20}}
-                animate={visible ? {opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                initial={{opacity: 1, y: 20}}
                 transition={{ duration: 0.5, ease: "easeOut", delay: delay }}
-                whileHover={{ y:-4}}
+                whileHover={{ y:-4, transition: { duration: 0.1, ease: "easeInOut" }}}
                 onClick={() => setExpanded(prev => !prev)}
-                className="flex flex-col gap-3 p-6 rounded-lg border border-vintage-lavender-600
+                className="flex flex-col gap-3 p-6 rounded-xl border-3 border-vintage-lavender-600
                        hover:border-vintage-lavender-400 cursor-default transition-all
                         hover:shadow-lg hover:shadow-vintage-lavender-800
                        bg-vintage-lavender-1000 bg-opacity-40 w-full"
             >
-                <h2 className="font-bitcount text-2xl text-vintage-lavender-300">
+                <h2 className="font-bitcount text-4xl text-vintage-lavender-300">
                     {card.name}
                 </h2>
 
                 {/* Role */}
                 {card.role && (
-                    <p className="text-xs font-primary text-vintage-lavender-400 uppercase tracking-widest">
+                    <p className="text-2xl font-primary text-vintage-lavender-400 uppercase tracking-widest">
                         {card.role}
                     </p>
                 )}
 
                 {/* Dates */}
                 {card.dates && (
-                    <p className="text-xs font-primary text-vintage-lavender-200">
+                    <p className="text-2xl font-primary text-vintage-lavender-200">
                         {card.dates[0]} — {card.dates[1]}
                     </p>
                 )}
 
                 {/* Description */}
-                <p className="text-sm font-primary text-vintage-lavender-300 leading-relaxed">
+                <p className="text-2xl font-primary text-vintage-lavender-300 leading-relaxed">
                     {card.description}
                 </p>
 
